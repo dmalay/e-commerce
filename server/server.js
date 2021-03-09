@@ -4,6 +4,7 @@ import cors from 'cors'
 import sockjs from 'sockjs'
 import { renderToStaticNodeStream } from 'react-dom/server'
 import React from 'react'
+import axios from 'axios'
 
 import cookieParser from 'cookie-parser'
 import config from './config'
@@ -47,6 +48,11 @@ server.get('/api/v1/products', async (req, res) => {
     .then((it) => JSON.parse(it))
     .catch(() => ({ status: 'error' }))
   res.json(data)
+})
+
+server.get('/api/v1/rates', async (req, res) => {
+  const rates = await axios('https://api.exchangeratesapi.io/latest').then((it) => it.data)
+  res.json(rates)
 })
 
 server.use('/api/', (req, res) => {
