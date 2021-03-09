@@ -1,9 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import SortBtn from './sort.button'
 import CurrencyBtn from './currency.button'
 import Checkout from './checkout'
-import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (

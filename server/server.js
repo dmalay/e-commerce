@@ -1,7 +1,6 @@
 import express from 'express'
 import path from 'path'
 import cors from 'cors'
-import bodyParser from 'body-parser'
 import sockjs from 'sockjs'
 import { renderToStaticNodeStream } from 'react-dom/server'
 import React from 'react'
@@ -9,6 +8,8 @@ import React from 'react'
 import cookieParser from 'cookie-parser'
 import config from './config'
 import Html from '../client/html'
+
+const { readFile } = require('fs').promises
 
 const Root = () => ''
 
@@ -34,12 +35,19 @@ const server = express()
 const middleware = [
   cors(),
   express.static(path.resolve(__dirname, '../dist/assets')),
-  bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }),
-  bodyParser.json({ limit: '50mb', extended: true }),
+  express.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }),
+  express.json({ limit: '50mb', extended: true }),
   cookieParser()
 ]
 
 middleware.forEach((it) => server.use(it))
+
+server.get('/api/v1/products', async (req, res) => {
+  const data = await readFile(`${__dirname}/data/data.json`, { encoding: 'utf8' })
+    .then((it) => JSON.parse(it))
+    .catch(() => ({ status: 'error' }))
+  res.json(data)
+})
 
 server.use('/api/', (req, res) => {
   res.status(404)
