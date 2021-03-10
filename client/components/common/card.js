@@ -12,7 +12,7 @@ const Card = (props) => {
       <div className="card">
         <img className="card__image" src={list.image} alt={list.title} />
         <div className="card__price">price:{priceRecalc.toFixed(2)}</div>
-        <div className="currency">currency{list.currency}</div>
+        <div className="currency">currency{currency}</div>
         <div className="card__title">title{list.title}</div>
         <div className="card__product-amount">amnt</div>
       </div>
