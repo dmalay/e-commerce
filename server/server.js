@@ -10,7 +10,7 @@ import cookieParser from 'cookie-parser'
 import config from './config'
 import Html from '../client/html'
 
-const { readFile } = require('fs').promises
+const { readFile, writeFile, unlink } = require('fs').promises
 
 const Root = () => ''
 
@@ -53,6 +53,40 @@ server.get('/api/v1/products', async (req, res) => {
 server.get('/api/v1/rates', async (req, res) => {
   const rates = await axios('https://api.exchangeratesapi.io/latest').then((it) => it.data)
   res.json(rates)
+})
+
+function readLogsFromFile() {
+  const fileData = readFile(`${__dirname}/data/logs.json`)
+    .then((data) => {
+      return JSON.parse(data)
+    })
+    .catch(async () => {
+      await writeFile(`${__dirname}/data/logs.json`, JSON.stringify([]), { encoding: 'utf8' })
+      return []
+    })
+  return fileData
+}
+
+function writeLogsToFile(file) {
+  writeFile(`${__dirname}/data/logs.json`, JSON.stringify(file), { encoding: 'utf8' })
+}
+
+server.get('/api/v1/logs', async (req, res) => {
+  const logsFile = await readLogsFromFile()
+  res.json(logsFile)
+})
+
+server.post('/api/v1/logs', async (req, res) => {
+  const newLog = req.body
+  const logFileData = await readLogsFromFile()
+  writeLogsToFile([...logFileData, newLog])
+  res.json({ status: `new log added: ${newLog}` })
+})
+
+server.delete('/api/v1/logs', (req, res) => {
+  unlink(`${__dirname}/data/logs.json`)
+    .then(() => res.json({ status: 'all logs cleared' }))
+    .catch(() => res.send('err'))
 })
 
 server.use('/api/', (req, res) => {

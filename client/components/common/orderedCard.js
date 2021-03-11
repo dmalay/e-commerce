@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { changeCart } from '../../redux/reducers/products'
+import { addLog } from '../../redux/reducers/logs'
 
 const OrderedCard = (props) => {
   const { cartData } = props
@@ -12,12 +13,15 @@ const OrderedCard = (props) => {
   const dispatch = useDispatch()
   const onClickRemove = () => {
     dispatch(changeCart(cartData.id, quantity - 1))
+    dispatch(addLog(`removed ${cartData.title} from the cart`))
   }
   const onClickAdd = () => {
     dispatch(changeCart(cartData.id, quantity + 1))
+    dispatch(addLog(`added ${cartData.title} to the cart`))
   }
   const onClickDelete = () => {
     dispatch(changeCart(cartData.id, 0))
+    dispatch(addLog(`deleted ${cartData.title} from the cart`))
   }
 
   return (
