@@ -16,7 +16,7 @@ const Card = (props) => {
     dispatch(changeCart(list.id, quantity ? quantity + 1 : 1))
   }
   const onClickRemove = () => {
-    dispatch(changeCart(list.id, quantity > 1 ? quantity - 1: 0))
+    dispatch(changeCart(list.id, quantity > 1 ? quantity - 1 : 0))
   }
   const onClickDelete = () => {
     dispatch(changeCart(list.id, 0))
@@ -31,9 +31,15 @@ const Card = (props) => {
         <div className="card__title">title{list.title}</div>
         <div className="card__product-amount">amnt{quantity}</div>
       </div>
-      <button type="button" onClick={onClickRemove}>Minus Button</button>
-      <button type="button" onClick={onClickDelete}>Minus Button</button>
-      <button type="button" onClick={onClickAdd}>Plus Button</button>
+      <button type="button" onClick={onClickRemove}>
+        Remove
+      </button>
+      <button type="button" onClick={onClickDelete}>
+        Clear
+      </button>
+      <button type="button" onClick={onClickAdd}>
+        Add
+      </button>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import sortData from './products.util'
+import sortData from './products-util'
 
 const GET_PRODUCTS = 'GET_PRODUCTS'
 const SET_CURRENCY = 'SET_CURRENCY'
@@ -62,7 +62,7 @@ export function getProducts() {
 export function setCurrency(currency) {
   return (dispatch) => {
     axios.get('/api/v1/rates').then(({ data }) => {
-      dispatch({ type: SET_CURRENCY, data: currency, rates: data.rates })
+      dispatch({ type: SET_CURRENCY, currency, rates: data.rates })
     })
   }
 }
@@ -82,7 +82,7 @@ export function changeCart(id, quantity) {
     const store = getState()
     const { cart } = store.products
     const addingData = { ...cart, [id]: quantity }
-    if(!quantity) {
+    if (!quantity) {
       delete addingData[id]
     }
     dispatch({ type: CHANGE_CART, cart: addingData })

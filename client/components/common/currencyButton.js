@@ -10,9 +10,15 @@ const CurrencyBtn = () => {
   }
   return (
     <div>
-      <button type="button" onClick={setOnClick} value="USD">USD</button>
-      <button type="button" onClick={setOnClick} value="EUR">EUR</button>
-      <button type="button" onClick={setOnClick} value="CAD">CAD</button>
+      <button type="button" onClick={setOnClick} value="USD">
+        USD
+      </button>
+      <button type="button" onClick={setOnClick} value="EUR">
+        EUR
+      </button>
+      <button type="button" onClick={setOnClick} value="CAD">
+        CAD
+      </button>
     </div>
   )
 }

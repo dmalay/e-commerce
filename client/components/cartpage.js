@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux'
 
 import Head from './head'
 import Header from './common/header'
-import OrderedCard from './common/ordered-card'
+import OrderedCard from './common/orderedCard'
+import CartTotal from './common/cartTotal'
 
 const Cart = () => {
   const { productCards, cart } = useSelector((s) => s.products)
@@ -14,9 +15,12 @@ const Cart = () => {
       <Head title="CartPage" />
       <Header />
       <div>
-        {cartData.map((it) => {
-          return <OrderedCard key={it.id} cartData={it} />
-        })}
+        <CartTotal />
+        <div>
+          {cartData.map((it) => {
+            return <OrderedCard key={it.id} cartData={it} />
+          })}
+        </div>
       </div>
     </div>
   )

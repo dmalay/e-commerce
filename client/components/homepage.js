@@ -22,7 +22,7 @@ const Home = () => {
         {productData.map((it) => {
           return (
             <div key={it.id}>
-              <Card list={it}/>
+              <Card list={it} />
             </div>
           )
         })}
