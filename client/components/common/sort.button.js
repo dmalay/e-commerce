@@ -10,12 +10,20 @@ const SortBtn = () => {
 
   return (
     <div>
-        by price
-      <button type="button" id="sort-price" onClick={setOnClick} value={`{"type":"price", "order": 1 }`}>
+      by price
+      <button 
+      type="button" 
+      id="sort-price" 
+      onClick={setOnClick} 
+      value={`{"type":"price", "order": 1 }`}>
       High to Low
       </button>
-      <button type="button" id="sort-name" onClick={setOnClick} value={`{"type":"name", "order": 1 }`}>
-        by name
+      <button 
+      type="button" 
+      id="sort-name" 
+      onClick={setOnClick} 
+      value={`{"type":"name", "order": 1 }`}>
+      by name
       </button>
     </div>
   )

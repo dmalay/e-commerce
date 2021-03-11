@@ -1,4 +1,3 @@
-
 const sortData = (array, method) => {
   const sortedArr = [...array].sort((a, b) => {
     return (
