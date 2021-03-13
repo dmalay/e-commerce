@@ -14,12 +14,14 @@ const Cart = () => {
     <div>
       <Head title="CartPage" />
       <Header />
-      <div>
-        <CartTotal />
-        <div>
-          {cartData.map((it) => {
-            return <OrderedCard key={it.id} cartData={it} />
-          })}
+      <div className="flex flex-col md:items-center ">
+        <div className="container mx-auto px-6">
+          <CartTotal />
+          <div>
+            {cartData.map((it) => {
+              return <OrderedCard key={it.id} cartData={it} />
+            })}
+          </div>
         </div>
       </div>
     </div>

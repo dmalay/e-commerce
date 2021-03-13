@@ -18,14 +18,16 @@ const Home = () => {
     <div>
       <Head title="HomePage" />
       <Header />
-      <div>
-        {productData.map((it) => {
-          return (
-            <div key={it.id}>
-              <Card list={it} />
-            </div>
-          )
-        })}
+      <div className="container mx-auto px-6">
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+          {productData.map((it) => {
+            return (
+              <div key={it.id}>
+                <Card list={it} />
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

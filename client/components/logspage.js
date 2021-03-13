@@ -17,9 +17,13 @@ const Logs = () => {
     dispatch(clearLogs())
   }
   return (
-    <div>
+    <div className="container mx-auto px-6 bg-gray-200">
       <Head title="LogsPage" />
-      <button type="button" onClick={setOnClick}>
+      <button
+        type="button"
+        className="font-semibold border-b-2 border-red-700 border-dotted"
+        onClick={setOnClick}
+      >
         CLEAR LOGS
       </button>
       <div>
