@@ -37,7 +37,7 @@ const Card = (props) => {
           <h3 className="card__title text-gray-700 uppercase">{list.title}</h3>
           <span className="currency mt-2">{currency}</span>
           <span className="card__price mt-2 px-2">{priceRecalc.toFixed(2)}</span>
-          <span className="card__product-amount pl-24 font-semibold">x{quantity}</span>
+          <span className="card__product-amount pl-24 font-semibold">{quantity}</span>
         </div>
         <div className="flex justify-around">
           <button
