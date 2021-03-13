@@ -11,7 +11,7 @@ const Logs = () => {
     dispatch(getLogs())
   }, [dispatch])
 
-  const logsData = useSelector((s) => s.logs.logs)
+  const { logs } = useSelector((s) => s.logs)
 
   const setOnClick = () => {
     dispatch(clearLogs())
@@ -27,7 +27,7 @@ const Logs = () => {
         CLEAR LOGS
       </button>
       <div>
-        {logsData.map((it) => {
+        {logs.map((it) => {
           return (
             <div key={it.date}>
               <LogsContent logs={it} />

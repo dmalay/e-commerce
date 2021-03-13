@@ -35,9 +35,11 @@ export default (state = initialState, action) => {
 
 export function getLogs() {
   return (dispatch) => {
-    axios.get('api/v1/logs').then(({ data }) => {
-      dispatch({ type: GET_LOGS, logs: data })
-    })
+    axios.get('api/v1/logs')
+      .then(({ data }) => {
+        dispatch({ type: GET_LOGS, logs: data })
+      })
+      .catch(() => dispatch({ type: GET_LOGS, logs: [] }))
   }
 }
 
@@ -45,6 +47,7 @@ export function addLog(log) {
   return (dispatch) => {
     axios.post('/api/v1/logs', { date: +new Date(), action: log })
     dispatch({ type: ADD_LOG, data: log })
+    dispatch({type: CLEAR_LOGS, log })
   }
 }
 
