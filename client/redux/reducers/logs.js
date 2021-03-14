@@ -5,6 +5,7 @@ const GET_LOGS = 'GET_LOGS'
 const CLEAR_LOGS = 'CLEAR_LOGS'
 
 const initialState = {
+  lastLog:'',
   logs: []
 }
 
@@ -13,7 +14,7 @@ export default (state = initialState, action) => {
     case ADD_LOG: {
       return {
         ...state,
-        logs: action.data
+        lastLog: action.data
       }
     }
     case GET_LOGS: {
@@ -43,11 +44,10 @@ export function getLogs() {
   }
 }
 
-export function addLog(log) {
+export function addLog(lastLog) {
   return (dispatch) => {
-    axios.post('/api/v1/logs', { date: +new Date(), action: log })
-    dispatch({ type: ADD_LOG, data: log })
-    dispatch({type: CLEAR_LOGS, log })
+    axios.post('/api/v1/logs', { date: +new Date(), action: lastLog })
+    dispatch({ type: ADD_LOG, data: lastLog })
   }
 }
 
